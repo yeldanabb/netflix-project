@@ -3,7 +3,7 @@ from app.database import SessionLocal, engine
 from app import models
 models.Base.metadata.create_all(bind=engine)
 
-def load_data(file_path: str):
+def load_csv_to_db(file_path: str):
     df = pd.read_csv(file_path)
     df['director'] = df['director'].fillna('')
     df['cast'] = df['cast'].fillna('')
@@ -21,6 +21,12 @@ def load_data(file_path: str):
     db.commit()
 
     for _, row in df.iterrows():
+        existing_movie = db.query(models.Movie).filter(
+            models.Movie.show_id == str(row['show_id'])
+        ).first()
+        
+        if existing_movie:
+            continue 
         movie = models.Movie(
             show_id=row['show_id'],
             type=row['type'],

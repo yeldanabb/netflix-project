@@ -1,5 +1,6 @@
 data/
 venv/
+netflix.csv
 .env
 vectorstore/
 __pycache__/
