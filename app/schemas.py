@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional, List
 from datetime import date
 
@@ -6,14 +6,12 @@ class CategoryOut(BaseModel):
     id: int
     name: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class RatingOut(BaseModel):
     name: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class MovieOut(BaseModel):
     id: int
@@ -31,8 +29,7 @@ class MovieOut(BaseModel):
     categories: List[CategoryOut] = []
     rating_rel: Optional[RatingOut]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class UserCreate(BaseModel):
     username: str
