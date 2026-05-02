@@ -1,6 +1,7 @@
 import pandas as pd
-from app.database import SessionLocal
+from app.database import SessionLocal, engine
 from app import models
+models.Base.metadata.create_all(bind=engine)
 
 def load_data(file_path: str):
     df = pd.read_csv(file_path)

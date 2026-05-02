@@ -36,3 +36,9 @@ class Rating(Base):
     __tablename__ = 'ratings'
     name = Column(String, primary_key=True)
     movies = relationship('Movie', back_populates='rating_rel')
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    password_hash = Column(String, nullable=False)
